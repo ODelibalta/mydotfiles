@@ -1,0 +1,20 @@
+window:
+  
+  dimensions:
+    columns: 200
+    lines: 80
+  
+  padding:
+    x: 10
+    y: 11
+
+font:
+  size: 22.0
+  offset:
+    y: 12
+    x: 1
+
+cursor:
+  style:
+    shape: Beam
+    blinking: On
