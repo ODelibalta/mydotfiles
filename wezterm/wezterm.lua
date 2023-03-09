@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local act = wezterm.action
 
 return {
   color_scheme='MaterialDarker',
@@ -9,15 +10,20 @@ return {
   keys = {
     -- split pane horizontally
     {
-      key = 'd',
+      key = 'D',
       mods = 'CMD',
       action = wezterm.action.SplitHorizontal {domain = 'CurrentPaneDomain' },
     },
     -- split pane vertically
     {
-      key = 'd',
+      key = 'D',
       mods = 'CMD|SHIFT',
       action = wezterm.action.SplitVertical {domain = 'CurrentPaneDomain' },
+    },
+    {
+      key = 'R',
+      mods = 'CMD|SHIFT',
+      action = act.ClearScrollback 'ScrollbackAndViewport',
     },
   },
 }
