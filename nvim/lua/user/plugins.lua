@@ -130,9 +130,9 @@ use({
 use({
     'nvim-telescope/telescope.nvim',
     requires = {
-        'nvim-lua/plenary.nvim',
-        'kyazdani42/nvim-web-devicons',
-        'nvim-telescope/telescope-live-grep-args.nvim',
+        {'nvim-lua/plenary.nvim'},
+        {'kyazdani42/nvim-web-devicons'},
+        {'nvim-telescope/telescope-live-grep-args.nvim'},
         {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
     },
     config = function()
@@ -154,7 +154,7 @@ use({
     'nvim-lualine/lualine.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-        require('lualine').setup()
+        require('user/plugins/lualine')
     end,
 })
 
@@ -163,9 +163,52 @@ use({
     requires = 'kyazdani42/nvim-web-devicons',
     after = 'onedarkpro.nvim',
     config = function()
-        require('bufferline').setup()
+        require('user/plugins/bufferline')
     end,
 })
+
+use({
+  'lukas-reineke/indent-blankline.nvim',
+  config = function()
+    require('user/plugins/indent-blankline')
+  end,
+})
+
+use({
+  'glepnir/dashboard-nvim',
+  config = function()
+    require('user/plugins/dashboard-nvim')
+  end,
+})
+
+use({
+  'lewis6991/gitsigns.nvim',
+  requires = 'nvim-lua/plenary.nvim',
+  config = function()
+    require('gitsigns').setup({
+      sign_priority = 20,
+      current_line_blame = true,
+      on_attach = function(bufnr)
+        vim.keymap.set('n', ']h', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true, buffer = bufnr })
+        vim.keymap.set('n', '[h', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true, buffer = bufnr })
+      end,
+    })
+  end,
+})
+
+use({
+  'tpope/vim-fugitive',
+  requires = 'tpope/vim-rhubarb',
+  cmd = 'G',
+})
+
+use({
+  'voldikss/vim-floaterm',
+  config = function()
+    require('user/plugins/floaterm')
+  end,
+})
+
 
 -- put this at the end of all plugins
 if packer_bootstrap then
