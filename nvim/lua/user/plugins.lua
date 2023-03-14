@@ -65,6 +65,10 @@ use({
     'olimorris/onedarkpro.nvim',
     config = function()
         vim.cmd('colorscheme onedark')
+        vim.api.nvim_set_hl(0, 'CursorLineBg', {
+          fg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
+          bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
+        })
     end,
 })
 
@@ -209,11 +213,84 @@ use({
   end,
 })
 
+use({
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    requires = {
+        'nvim-treesitter/playground',
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        'JoosepAlviste/nvim-ts-context-commentstring',
+    },
+    config = function()
+        require('user/plugins/treesitter')
+    end,
+})
+
+use({
+  'hrsh7th/nvim-cmp',
+  requires = {
+    'L3MON4D3/LuaSnip',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
+    'hrsh7th/cmp-nvim-lua',
+    'jessarcher/cmp-path',
+    'onsails/lspkind-nvim',
+    'saadparwaiz1/cmp_luasnip',
+  },
+  config = function()
+    require('user/plugins/cmp')
+  end,
+})
+
+use({
+  'neovim/nvim-lspconfig',
+  requires = {
+    'b0o/schemastore.nvim',
+    'folke/lsp-colors.nvim',
+  },
+  config = function()
+    require('user.plugins.lspconfig')
+  end,
+})
+
+use({
+  'jose-elias-alvarez/null-ls.nvim',
+  config = function()
+    require('user.plugins.null-ls')
+  end,
+})
+
+use({
+  'phpactor/phpactor',
+  branch = 'master',
+  ft = 'php',
+  run = 'composer install --no-dev -o',
+  config = function()
+    require('user.plugins.phpactor')
+  end,
+})
+
+use({
+  'tpope/vim-projectionist',
+  requires = 'tpope/vim-dispatch',
+  config = function()
+    require('user.plugins.projectionist')
+  end,
+})
 
 -- put this at the end of all plugins
 if packer_bootstrap then
         require('packer').sync()
 end
+
+use({
+  'L3MON4D3/LuaSnip',
+  config = function()
+    require('user.plugins.luasnip')
+  end,
+})
 
 vim.cmd([[
   augroup packer_user_config

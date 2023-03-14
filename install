@@ -21,3 +21,6 @@ ln -s $DOTFILES/alacritty/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
 rm -rf $HOME/.config/wezterm/wezterm.lua
 ln -s $DOTFILES/wezterm/wezterm.lua $HOME/.config/wezterm/wezterm.lua
+
+rm -rf $HOME/.config/phpactor/phpactor.lua
+ln -s $DOTFILES/phpactor/phpactor.lua $HOME/.config/phpactor/phpactor.lua
